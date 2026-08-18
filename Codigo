@@ -5,6 +5,10 @@
 #define potrojo GPIO_NUM_34
 #define potverde GPIO_NUM_35
 
+#define ledrojo 32
+#define ledverde 33
+#define ledazul 25
+
 uint16_t valorRojo = 0;
 uint16_t valorVerde = 0;
 
@@ -17,6 +21,12 @@ void setup() {
 
     analogReadResolution(12);
     analogSetAttenuation(ADC_11db);
+
+    pinMode(ledrojo, OUTPUT);
+    pinMode(ledverde, OUTPUT);
+    pinMode(ledazul, OUTPUT);
+
+    analogWrite(ledazul, 0);
 }
 
 void loop() {
@@ -32,6 +42,9 @@ void loop() {
 
     Serial.print("    Verde: ");
     Serial.println(verde);
+
+    analogWrite(ledrojo, rojo);
+    analogWrite(ledverde, verde);
 
     delay(500);
 }
