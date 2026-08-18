@@ -1,0 +1,37 @@
+#include <Arduino.h>
+#include "driver/gpio.h"
+#include <stdint.h>
+
+#define potrojo GPIO_NUM_34
+#define potverde GPIO_NUM_35
+
+uint16_t valorRojo = 0;
+uint16_t valorVerde = 0;
+
+uint8_t rojo = 0;
+uint8_t verde = 0;
+
+void setup() {
+
+    Serial.begin(115200);
+
+    analogReadResolution(12);
+    analogSetAttenuation(ADC_11db);
+}
+
+void loop() {
+
+    valorRojo = analogRead(potrojo);
+    valorVerde = analogRead(potverde);
+
+    rojo = map(valorRojo, 0, 4095, 0, 255);
+    verde = map(valorVerde, 0, 4095, 0, 255);
+
+    Serial.print("Rojo: ");
+    Serial.print(rojo);
+
+    Serial.print("    Verde: ");
+    Serial.println(verde);
+
+    delay(500);
+}
